@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
+import React, { FC } from 'react';
 
-interface OptionItem {
+export interface OptionItem {
   label: string;
   id: string;
 }
@@ -8,18 +8,23 @@ interface OptionItem {
 interface DropdownProps {
   options: OptionItem[];
   placeholder: string;
+  onSelect: (value: string) => void;
+  value: string;
 }
 
 export const Dropdown: FC<DropdownProps> = (props) => {
-  const { options, placeholder } = props;
-  const [selectedValue, setSelectedValue] = useState("");
+  const { options, placeholder, onSelect, value } = props;
+  const handleChangeValue = (value: string) => {
+    onSelect(value);
+  };
+
   return (
     <>
       <select
         id="drowpdown"
         name="dropdown"
-        onChange={(e) => setSelectedValue(e.target.value)}
-        value={selectedValue}
+        onChange={(e) => handleChangeValue(e.target.value)}
+        value={value}
       >
         <option disabled value="">
           {placeholder}

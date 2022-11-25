@@ -1,14 +1,11 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
 interface ButtonProps {
   label: string;
+  onClickAction: () => void;
 }
 
 export const Button: FC<ButtonProps> = (props) => {
-  const { label } = props;
-  return (
-    <div>
-      <button>{label}</button>
-    </div>
-  );
+  const { label, onClickAction } = props;
+  return <button onClick={onClickAction}>{label}</button>;
 };
