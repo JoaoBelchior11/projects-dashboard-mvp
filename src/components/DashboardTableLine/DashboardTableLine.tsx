@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useMemo, useState } from 'react';
 import { Gateway, Payment, Project } from '../../models/models';
+import styles from './DashboardTableLine.module.scss';
 
 interface DashboardTableLineProps {
   project: Project;
@@ -25,12 +26,15 @@ export const DashboardTableLine: FC<DashboardTableLineProps> = (props) => {
 
   return (
     <>
-      <div onClick={() => setShowTable((prev) => !prev)}>
+      <div
+        className={styles.lineLabel}
+        onClick={() => setShowTable((prev) => !prev)}
+      >
         <div>{project.name}</div>
-        <div>Total: {totalAmount}</div>
+        <div>Total: {totalAmount.toFixed(3)} USD</div>
       </div>
       {showTable && (
-        <table>
+        <table className={styles.table}>
           <thead>
             <tr>
               <th>Date</th>
@@ -48,7 +52,7 @@ export const DashboardTableLine: FC<DashboardTableLineProps> = (props) => {
                   <td>{labelGateway(payment.gatewayId) || ''}</td>
                 )}
                 <td>{payment.paymentId}</td>
-                <td>{payment.amount}</td>
+                <td>{payment.amount.toFixed(0)} USD</td>
               </tr>
             ))}
           </tbody>

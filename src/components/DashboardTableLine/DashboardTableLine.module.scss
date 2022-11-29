@@ -1,0 +1,31 @@
+.lineLabel {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 71px;
+  align-items: center;
+  padding: 0 24px;
+  margin-bottom: 2px;
+  border-radius: 10px;
+  color: #011f4b;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  thead {
+    background-color: #fff;
+  }
+  tr {
+    height: 35px;
+    text-align: center;
+  }
+  tr:nth-child(even) {
+    background: #fff;
+  }
+}

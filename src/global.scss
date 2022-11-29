@@ -1,0 +1,24 @@
+//Text
+
+h2 {
+  font-weight: 700;
+  color: #011f4b;
+  font-size: 24px;
+}
+
+span {
+  color: #7e8299;
+}
+
+// Calendar
+.react-datepicker__input-container {
+  margin: 10px;
+  input {
+    background-color: #1bc5bd;
+    border: none;
+    color: #fff;
+    height: 32px;
+    border-radius: 5px;
+    width: 118px;
+  }
+}

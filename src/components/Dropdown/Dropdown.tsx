@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import styles from './Dropdown.module.scss';
 
 export interface OptionItem {
   label: string;
@@ -19,7 +20,7 @@ export const Dropdown: FC<DropdownProps> = (props) => {
   };
 
   return (
-    <>
+    <div className={styles.dropdown}>
       <select
         id="drowpdown"
         name="dropdown"
@@ -35,6 +36,6 @@ export const Dropdown: FC<DropdownProps> = (props) => {
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 };

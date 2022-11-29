@@ -15,8 +15,8 @@ export const DashboardHeader: FC<DashboardHeaderProps> = (props) => {
   return (
     <div className={styles.header}>
       <div>
-        <div>Reports</div>
-        <div>Easily generate a report of your expenses</div>
+        <h2>Reports</h2>
+        <span>Easily generate a report of your expenses</span>
       </div>
       <div>
         <DashboardFilters

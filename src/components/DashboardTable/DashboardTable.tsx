@@ -1,6 +1,7 @@
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import { Gateway, Payment, Project } from '../../models/models';
 import { DashboardTableLine } from '../DashboardTableLine/DashboardTableLine';
+import styles from './DashboardTable.module.scss';
 
 interface DashboardTableProps {
   selectedProjects: Project[];
@@ -10,18 +11,6 @@ interface DashboardTableProps {
 
 export const DashboardTable: FC<DashboardTableProps> = (props) => {
   const { selectedProjects, selectedGateways, payments } = props;
-  const [totals, setTotals] = useState<{ [projectId: string]: number }>({});
-
-  const handleCalculateTotal = (newTotal: number, projectId: string) => {
-    if (Object.keys(totals).length === 0) {
-      setTotals({
-        [projectId]: newTotal,
-      });
-    } else {
-      const projectsTotals = { ...totals, [projectId]: newTotal };
-      setTotals(projectsTotals);
-    }
-  };
 
   const presentTotalAmount = useMemo(
     () => payments.reduce((acc, curr) => curr.amount + acc, 0),
@@ -45,16 +34,20 @@ export const DashboardTable: FC<DashboardTableProps> = (props) => {
 
   return (
     <div>
-      <div>{tableLabel}</div>
-      {selectedProjects?.map((project) => (
-        <DashboardTableLine
-          gateways={selectedGateways}
-          key={project.projectId}
-          project={project}
-          payments={projectPayments(project.projectId)}
-        />
-      ))}
-      <div>Total: {presentTotalAmount}</div>
+      <div className={styles.dashboardTable}>
+        <div className={styles.tableLabel}>{tableLabel}</div>
+        {selectedProjects?.map((project) => (
+          <DashboardTableLine
+            gateways={selectedGateways}
+            key={project.projectId}
+            project={project}
+            payments={projectPayments(project.projectId)}
+          />
+        ))}
+      </div>
+      <div className={styles.totalLine}>
+        Total: {presentTotalAmount.toFixed(3)} USD
+      </div>
     </div>
   );
 };

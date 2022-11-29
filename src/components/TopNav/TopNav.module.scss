@@ -10,10 +10,31 @@
   padding: 20px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  div {
+    flex: 1;
+  }
 }
 
 .user {
   padding: 20px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  div {
+    margin: 10px;
+  }
+}
+
+.initials {
+  background-color: #f6ca65;
+  color: #fff;
+  font-weight: 700;
+  width: 43px;
+  height: 43px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 23px;
+  border-radius: 5px;
 }

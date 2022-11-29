@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { Gateway, Payment, Project } from '../../models/models';
 import { DashboardTable } from '../DashboardTable/DashboardTable';
 import { PieChart } from '../PieChart/PieChart';
+import styles from './DashboardBody.module.scss';
 
 interface DashboardBodyProps {
   selectedProjects: Project[];
@@ -32,7 +33,6 @@ export const DashboardBody: FC<DashboardBodyProps> = (props) => {
         },
         {},
       );
-      console.log(projectAndAmount);
       const labels = Object.keys(projectAndAmount).map(
         (projectId) =>
           selectedProjects.find((p) => p.projectId === projectId)?.name || '',
@@ -41,20 +41,51 @@ export const DashboardBody: FC<DashboardBodyProps> = (props) => {
         data: Object.values(projectAndAmount),
         labels,
       };
+    } else if (selectedProjects.length === 1) {
+      const projectPayments = payments.filter(
+        (payment) => payment.projectId === selectedProjects[0].projectId,
+      );
+      const gatewayAndAmount = projectPayments.reduce(
+        (acc: { [x: string]: number }, curr) => {
+          if (acc[curr.gatewayId]) {
+            return {
+              ...acc,
+              [curr.gatewayId]: curr.amount + acc[curr.gatewayId],
+            };
+          }
+          return {
+            ...acc,
+            [curr.gatewayId]: curr.amount,
+          };
+        },
+        {},
+      );
+      const labels = Object.keys(gatewayAndAmount).map(
+        (gatewayId) =>
+          selectedGateways.find((g) => g.gatewayId === gatewayId)?.name || '',
+      );
+      return {
+        data: Object.values(gatewayAndAmount),
+        labels,
+      };
     }
   }, [selectedGateways, selectedProjects, payments]);
 
   return (
-    <div>
+    <div className={styles.dashboardBody}>
       <DashboardTable
         selectedGateways={selectedGateways}
         selectedProjects={selectedProjects}
         payments={payments}
       />
-      <PieChart
-        dataSet={chartData?.data || []}
-        labels={chartData?.labels || []}
-      />
+      {chartData && (
+        <div>
+          <PieChart
+            dataSet={chartData?.data || []}
+            labels={chartData?.labels || []}
+          />
+        </div>
+      )}
     </div>
   );
 };

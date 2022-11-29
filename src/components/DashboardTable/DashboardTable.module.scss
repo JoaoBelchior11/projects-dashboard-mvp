@@ -1,0 +1,23 @@
+.dashboardTable {
+  background-color: #f1fafe;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.totalLine {
+  height: 53px;
+  background-color: #f1fafe;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  color: #011f4b;
+  font-weight: 700;
+  font-size: 16px;
+}
+.tableLabel {
+  color: #011f4b;
+  font-weight: 700;
+}
